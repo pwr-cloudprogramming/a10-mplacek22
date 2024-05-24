@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  ticback:
+    image: tictactoe_back:latest
+    container_name: tictactoe_back
+    environment:
+      - PUBLIC_IP=${PUBLIC_IP}
+    ports:
+      - "8080:8080"
+    networks:
+      - tictactoenet
+
+  ticfront:
+    image: tictactoe_front:latest
+    container_name: tictactoe_front
+    ports:
+      - "3000:3000"
+    depends_on:
+      - ticback 
+    networks:
+      - tictactoenet
+
+networks:
+  tictactoenet:
