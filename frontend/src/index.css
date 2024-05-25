@@ -204,3 +204,10 @@ span {
 #homeSection {
     display: block;
 }
+
+#signedInUsername {
+    color: white;
+    font-size: 16px;
+    margin-right: auto;
+    padding-left: 10px;
+}

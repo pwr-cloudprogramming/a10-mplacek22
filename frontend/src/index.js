@@ -206,37 +206,3 @@ function reset() {
 $("#reset").click(function () {
     reset();
 });
-
-function showHome() {
-    document.getElementById('homeSection').style.display = 'block';
-    document.getElementById('signInForm').style.display = 'none';
-    document.getElementById('signUpForm').style.display = 'none';
-}
-
-function showSignIn() {
-    document.getElementById('homeSection').style.display = 'none';
-    document.getElementById('signInForm').style.display = 'block';
-    document.getElementById('signUpForm').style.display = 'none';
-}
-
-function showSignUp() {
-    document.getElementById('homeSection').style.display = 'none';
-    document.getElementById('signInForm').style.display = 'none';
-    document.getElementById('signUpForm').style.display = 'block';
-}
-
-function signIn() {
-    // Handle sign in
-    var username = document.getElementById('signInUsername').value;
-    var password = document.getElementById('signInPassword').value;
-    // Add your sign in logic here
-    alert('Sign In: ' + username);
-}
-
-function signUp() {
-    // Handle sign up
-    var username = document.getElementById('signUpUsername').value;
-    var password = document.getElementById('signUpPassword').value;
-    // Add your sign up logic here
-    alert('Sign Up: ' + username);
-}
