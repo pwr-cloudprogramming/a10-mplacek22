@@ -1,4 +1,4 @@
-# Jane Doe - Terraform, EC2, TicTacToe report
+# Maja Placek - Cognito, TicTacToe report
 
 - Course: *Cloud programming*
 - Group: monday 9:15
