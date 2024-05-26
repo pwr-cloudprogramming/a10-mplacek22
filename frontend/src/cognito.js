@@ -210,13 +210,28 @@ function createCallback(successMessage, userName = "", email = "", confirmed = "
             alert(message);
 
             if (status === "Signed In") {
+                localStorage.setItem("loggedInUser", userName);
+                // Store the tokens in local storage
+                cognitoUser.getSession((err, session) => {
+                    if (err) {
+                        console.log(err);
+                        return;
+                    }
+                    localStorage.setItem("idToken", session.getIdToken().getJwtToken());
+                    localStorage.setItem("accessToken", session.getAccessToken().getJwtToken());
+                });
                 updateSignedInUsername(userName);
             } else if (status === "Signed Out") {
+                localStorage.removeItem("loggedInUser");
+                localStorage.removeItem("idToken");
+                localStorage.removeItem("accessToken");
                 updateSignedInUsername("");
             }
         }
     };
 }
+
+
 
 function updateSignedInUsername(userName) {
     document.getElementById("signedInUsername").innerText = userName ? `Signed in as: ${userName}` : "";
@@ -291,9 +306,33 @@ function actionSignInUser() {
     updateModal(true, false, true, false, false, "Sign In", "Authenticate user");
 }
 
-function actionSignOutUser() {
-    let message = `user ${user.name} signed out`
-    let callback = createCallback(message, user.name,
-        user.email, user.email_verified, "Signed Out");
-    signOutUser(callback);
+function signOutUser(callback) {
+    if (cognitoUser) {
+        if (cognitoUser.signInUserSession) {
+            cognitoUser.signOut();
+            localStorage.removeItem("loggedInUser");
+            callback(null, {});
+            return;
+        }
+    }
+    callback({ name: "Error", message: "User is not signed in" }, null);
 }
+
+function getSessionToken() {
+    return new Promise((resolve, reject) => {
+        if (cognitoUser) {
+            cognitoUser.getSession((err, session) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(session.getIdToken().getJwtToken());
+                }
+            });
+        } else {
+            reject(new Error("User is not signed in"));
+        }
+    });
+}
+
+window.getSessionToken = getSessionToken;
+

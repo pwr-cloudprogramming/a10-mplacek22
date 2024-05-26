@@ -831,11 +831,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\C#_projects\\TicTacToeCloud\\TicTacToeCloud\\TicTacToeCloud.csproj",
+      "projectUniqueName": "C:\\Studia\\Semestr_6\\Programowanie_w_chmurze\\a10-mplacek22\\backend\\TicTacToeCloud\\TicTacToeCloud\\TicTacToeCloud.csproj",
       "projectName": "TicTacToeCloud",
-      "projectPath": "C:\\C#_projects\\TicTacToeCloud\\TicTacToeCloud\\TicTacToeCloud.csproj",
+      "projectPath": "C:\\Studia\\Semestr_6\\Programowanie_w_chmurze\\a10-mplacek22\\backend\\TicTacToeCloud\\TicTacToeCloud\\TicTacToeCloud.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\C#_projects\\TicTacToeCloud\\TicTacToeCloud\\obj\\",
+      "outputPath": "C:\\Studia\\Semestr_6\\Programowanie_w_chmurze\\a10-mplacek22\\backend\\TicTacToeCloud\\TicTacToeCloud\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

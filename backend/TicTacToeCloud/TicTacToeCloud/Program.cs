@@ -5,15 +5,15 @@ using TicTacToeCloud.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddEnvironmentVariables();
-// Add services to the container.
 
+// Add services to the container.
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSignalR();
-
 builder.Services.AddScoped<GameService, GameService>();
+
+// CORS Configuration
 var publicIp = Environment.GetEnvironmentVariable("PUBLIC_IP");
 var albDnsName = Environment.GetEnvironmentVariable("ALB_DNS_NAME");
 builder.Services.AddCors(options =>
@@ -23,12 +23,12 @@ builder.Services.AddCors(options =>
         {
             builder.WithOrigins(
                 "http://localhost:8080",
-                "http://127.0.0.1:8080",
-                "http://localhost:3000",
-                "http://127.0.0.1:3000",
+                "http://3.235.235.222:8080",
+                "http://3.235.235.222:3000",
+                "http://127.0.0.1:5500",
                 $"http://{publicIp}:3000",
                 $"http://{publicIp}:8080",
-                 $"http://{albDnsName}:3000",
+                $"http://{albDnsName}:3000",
                 $"http://{albDnsName}:8080",
                 "http://mplacek22.us-east-1.elasticbeanstalk.com:8080",
                 "http://mplacek22.us-east-1.elasticbeanstalk.com:3000",
@@ -41,12 +41,14 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddAuthorization();
-
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer();
+    .AddJwtBearer(options =>
+    {
+        options.Authority = "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_xmzk2427v";
+        options.Audience = "your-app-client-id"; // Replace with your actual App Client ID
+    });
 
 builder.Services.ConfigureOptions<JwtBearerConfigureOptions>();
-
 
 var app = builder.Build();
 
@@ -57,14 +59,17 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseAuthentication();
-
-app.UseAuthorization();
-
 app.UseCors("AllowSpecificOrigin");
 
-app.MapControllers();
+app.UseRouting();
 
-app.MapHub<GameHub>("/gameplay");
+app.UseAuthentication();
+app.UseAuthorization();
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+    endpoints.MapHub<GameHub>("/gameplay");
+});
 
 app.Run();

@@ -2,7 +2,7 @@ var turns = [["#", "#", "#"], ["#", "#", "#"], ["#", "#", "#"]];
 var turn = "";
 var gameOn = false;
 
-const url = 'http://<BACKEND_ADDRESS>:8080';
+const url = 'http://localhost:8080';
 
 let gameId;
 let playerType;
@@ -21,7 +21,7 @@ function connectToSocket(gameId) {
         console.log(gameData);
         if (playerType == 1 && gameData.player2.login != undefined) {
             $("#oponentLogin").text(gameData.player2.login);
-            alert("Player 2 enetered game: " + gameData.player2.login)
+            alert("Player 2 entered game: " + gameData.player2.login)
             gameOn = true;
         }
     });
@@ -36,12 +36,26 @@ function connectToSocket(gameId) {
     });
 }
 
+function makeAuthenticatedRequest(settings) {
+    return window.getSessionToken().then(token => {
+        settings.headers = {
+            ...settings.headers,
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json'
+        };
+        return $.ajax(settings);
+    }).catch(err => {
+        alert('Failed to get session token: ' + err.message);
+    });
+}
+
+
 async function createGame() {
-    let login = document.getElementById("login").value;
+    let login = localStorage.getItem("loggedInUser");
     if (login == null || login === '') {
-        alert("Please enter login");
+        alert("Please sign in first");
     } else {
-        $.ajax({
+        makeAuthenticatedRequest({
             url: url + "/game/start",
             type: 'POST',
             dataType: "json",
@@ -61,16 +75,17 @@ async function createGame() {
                 alert(error.responseText);
                 console.log(error);
             }
-        })
+        });
     }
 }
 
+
 function connectToRandom() {
-    let login = document.getElementById("login").value;
+    let login = localStorage.getItem("loggedInUser");
     if (login == null || login === '') {
-        alert("Please enter login");
+        alert("Please sign in first");
     } else {
-        $.ajax({
+        makeAuthenticatedRequest({
             url: url + "/game/connect/random",
             type: 'POST',
             dataType: "json",
@@ -91,21 +106,22 @@ function connectToRandom() {
                 alert(error.responseText);
                 console.log(error);
             }
-        })
+        });
     }
 }
 
+
 function connectToSpecificGame() {
-    let login = document.getElementById("login").value;
+    let login = localStorage.getItem("loggedInUser");
     let enteredGameId = document.getElementById("game_id").value;
     if (login == null || login === '') {
-        alert("Please enter login");
+        alert("Please sign in first");
     }
     else if (enteredGameId == null || enteredGameId === '') {
         alert("Please enter game id");
     }
     else {
-        $.ajax({
+        makeAuthenticatedRequest({
             url: url + "/game/connect",
             type: 'POST',
             dataType: "json",
@@ -124,15 +140,15 @@ function connectToSpecificGame() {
                 connectToSocket(gameId);
                 $("#oponentLogin").text(data.player1.login);
                 alert("Congrats you're playing with: " + data.player1.login);
-              
             },
             error: function (error) {
                 alert(error.responseText);
                 console.log(error);
             }
-        })
+        });
     }
 }
+
 
 function playerTurn(turn, id) {
     if (gameOn) {
@@ -144,7 +160,7 @@ function playerTurn(turn, id) {
 }
 
 function makeAMove(type, xCoordinate, yCoordinate) {
-    $.ajax({
+    makeAuthenticatedRequest({
         url: url + "/game/gameplay",
         type: 'POST',
         dataType: "json",
@@ -162,8 +178,9 @@ function makeAMove(type, xCoordinate, yCoordinate) {
         error: function (xhr, textStatus, errorThrown) {
             alert(xhr.responseText);
         }
-    })
+    });
 }
+
 
 function displayResponse(data) {
 
@@ -206,3 +223,4 @@ function reset() {
 $("#reset").click(function () {
     reset();
 });
+
