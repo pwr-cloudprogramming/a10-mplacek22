@@ -2,7 +2,7 @@ var turns = [["#", "#", "#"], ["#", "#", "#"], ["#", "#", "#"]];
 var turn = "";
 var gameOn = false;
 
-const url = 'http://localhost:8080';
+const url = 'http://<ALB_DNS_NAME>:8080';
 
 let gameId;
 let playerType;

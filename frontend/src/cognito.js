@@ -1,7 +1,7 @@
 function getPoolData() {
     return {
-        UserPoolId: localStorage["aws-congnito-user-pool-id"],
-        ClientId: localStorage["aws-congnito-app-id"]
+        UserPoolId: "<COGNITO_USER_POOL_ID>",
+        ClientId: "<COGNITO_CLIENT_ID>"
     };
 }
 

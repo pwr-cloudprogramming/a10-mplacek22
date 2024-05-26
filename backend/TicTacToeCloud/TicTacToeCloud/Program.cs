@@ -13,9 +13,13 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSignalR();
 builder.Services.AddScoped<GameService, GameService>();
 
+// Retrieve environment variables
+var publicIp = Environment.GetEnvironmentVariable("PUBLIC_IP") ?? "localhost";
+var albDnsName = Environment.GetEnvironmentVariable("ALB_DNS_NAME") ?? "";
+var cognitoUserPoolId = Environment.GetEnvironmentVariable("COGNITO_USER_POOL_ID") ?? "us-east-1_xmzk2427v";
+var cognitoClientId = Environment.GetEnvironmentVariable("COGNITO_CLIENT_ID") ?? "44gosgfn7q6j13dakgiop0k4gg";
+
 // CORS Configuration
-var publicIp = Environment.GetEnvironmentVariable("PUBLIC_IP");
-var albDnsName = Environment.GetEnvironmentVariable("ALB_DNS_NAME");
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: "AllowSpecificOrigin",
@@ -44,8 +48,8 @@ builder.Services.AddAuthorization();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        options.Authority = "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_xmzk2427v";
-        options.Audience = "your-app-client-id"; // Replace with your actual App Client ID
+        options.Authority = $"https://cognito-idp.us-east-1.amazonaws.com/{cognitoUserPoolId}";
+        options.Audience = cognitoClientId;
     });
 
 builder.Services.ConfigureOptions<JwtBearerConfigureOptions>();
