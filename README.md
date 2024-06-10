@@ -61,13 +61,14 @@ Screenshots of configured AWS services. Screenshots of your application running.
 ## Reflections
 
 - What did you learn?
-    - I learned how to integrate AWS Cognito into an existing project, leveraging its user management and authentication capabilities. This included setting up a new User Pool, configuring policies, and creating App Clients to facilitate secure interactions between the frontend and backend.
+    - I learned how to integrate AWS Cognito into an existing project, leveraging its user management and authentication capabilities. This included setting up a new User Pool, configuring policies, and creating App Clients to facilitate secure interactions between the frontend and backend. In the future I would like to explore further functionalities of Cognito.
 - What obstacles did you overcome?
-    - passing the token to backend
+    - passing the token to backend. This was crucial to ensure that only authenticated users could access certain backend resources and functionalities. I used the amazon-cognito-identity-js library to handle the authentication flow and retrieve these tokens. Also, I had to analize how to build a proper header for this to succeed.
+    - easy assignment in comparison to previous ones
 - What did you help most in overcoming obstacles?
     - internet resources
       - https://www.youtube.com/watch?v=QKxTGcJHar0
       - https://www.npmjs.com/package/amazon-cognito-identity-js
 - Was that something that surprised you?
   - easy intergation into both .NET and js
-  - extensive security features offered by AWS Cognit
+  - extensive security features offered by AWS Cognito
