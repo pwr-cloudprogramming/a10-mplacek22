@@ -82,17 +82,25 @@ This architecture leverages AWS Cognito to manage user authentication and author
 ## Preview
 
 ### Screenshots of configured AWS services
+App UserPool
 ![AppPool](img/app_pool.jpg)
+Sign in experience
 ![Sign in experience](img/sign_in_experience.jpg)
+Sign up experience
 ![Sign up experience](img/sign_up_experience.jpg)
+Public client
 ![Public Client](img/public_client.jpg)
+Public client details
 ![Public Client details](img/public_client_detail.jpg)
 
 ### Screenshots of your application running.
-
+Home page
 ![Home page](img/img01.jpg)
+Sign up form
 ![Sign up](img/sign_up.jpg)
+Confirm user form
 ![Confirm user](img/confirm_user.jpg)
+Sign in form
 ![Sign in](img/sign_in.jpg)
 
 ## Reflections
