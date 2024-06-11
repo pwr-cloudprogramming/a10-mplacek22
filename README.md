@@ -96,16 +96,15 @@ This architecture leverages AWS Cognito to manage user authentication and author
 ![Sign in](img/sign_in.jpg)
 
 ## Reflections
-
-- What did you learn?
-  - I learned how to integrate AWS Cognito into an existing project, leveraging its user management and authentication capabilities. This included setting up a new User Pool, configuring policies, and creating App Clients to facilitate secure interactions between the frontend and backend. In the future I would like to explore further functionalities of Cognito.
-- What obstacles did you overcome?
-  - Passing the token to the backend: Ensuring that only authenticated users could access certain backend resources and functionalities was crucial. I used the amazon-cognito-identity-js library to handle the authentication flow and retrieve tokens. Understanding how to build a proper header to include these tokens in API requests was another challenge. This involved analyzing and implementing secure methods to pass the token and validate it on the server side.
-  - Easy assignment in comparison to previous ones: Despite being relatively easier, it was essential to ensure all configurations and integrations were done correctly, which still required careful attention to detail.
-- What did you help most in overcoming obstacles?
-  -  internet resources
-    - https://www.youtube.com/watch?v=QKxTGcJHar0 This video provided a step-by-step guide on setting up and integrating AWS Cognito with a .NET web application.
-    - https://www.npmjs.com/package/amazon-cognito-identity-js The documentation for the amazon-cognito-identity-js library was invaluable for understanding how to implement the authentication flow and manage tokens effectively.
-- Was that something that surprised you?
-  - Easy integration into both .NET and JavaScript: I was pleasantly surprised by how seamlessly AWS Cognito integrated with both .NET and JavaScript environments. This flexibility allowed me to implement a consistent authentication mechanism across different parts of the application.
-  - Extensive security features offered by AWS Cognito: AWS Cognito's extensive security features, such as built-in MFA, password policies, and automated email verification, exceeded my expectations. These features may significantly enhance the security posture of the application without requiring extensive custom development.
+### What did you learn?
+- I learned how to integrate AWS Cognito into an existing project, leveraging its user management and authentication capabilities. This included setting up a new User Pool, configuring policies, and creating App Clients to facilitate secure interactions between the frontend and backend. In the future I would like to explore further functionalities of Cognito.
+### What obstacles did you overcome?
+- Passing the token to the backend: Ensuring that only authenticated users could access certain backend resources and functionalities was crucial. I used the amazon-cognito-identity-js library to handle the authentication flow and retrieve tokens. Understanding how to build a proper header to include these tokens in API requests was another challenge. This involved analyzing and implementing secure methods to pass the token and validate it on the server side.
+- Easy assignment in comparison to previous ones: Despite being relatively easier, it was essential to ensure all configurations and integrations were done correctly, which still required careful attention to detail.
+### What did you help most in overcoming obstacles?
+-  internet resources
+  - https://www.youtube.com/watch?v=QKxTGcJHar0 This video provided a step-by-step guide on setting up and integrating AWS Cognito with a .NET web application.
+  - https://www.npmjs.com/package/amazon-cognito-identity-js The documentation for the amazon-cognito-identity-js library was invaluable for understanding how to implement the authentication flow and manage tokens effectively.
+### Was that something that surprised you?
+- Easy integration into both .NET and JavaScript: I was pleasantly surprised by how seamlessly AWS Cognito integrated with both .NET and JavaScript environments. This flexibility allowed me to implement a consistent authentication mechanism across different parts of the application.
+- Extensive security features offered by AWS Cognito: AWS Cognito's extensive security features, such as built-in MFA, password policies, and automated email verification, exceeded my expectations. These features may significantly enhance the security posture of the application without requiring extensive custom development.
